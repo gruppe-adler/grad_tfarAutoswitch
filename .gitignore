@@ -1,2 +1,7 @@
-@tfar_autoswitch/addons/
-temp/
+
+## Added by HEMTT
+releases/*
+*.biprivatekey
+keys/*
+.hemtt/local
+####
