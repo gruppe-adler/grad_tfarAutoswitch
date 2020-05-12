@@ -1,4 +1,4 @@
-#include "init.hpp"
+#include "script_component.hpp"
 
 compile preprocessFileLineNumbers "\task_force_radio\functions\common.sqf";
 
