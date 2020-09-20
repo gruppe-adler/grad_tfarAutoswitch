@@ -33,9 +33,9 @@ tfar_autoswitch_main_fnc_getPort = {
         if (TFAR_Teamspeak_Channel_Format == "") exitWith {
                 WARNING("CBA setting is empty, will not set channel name.")
         };
-        TFAR_Teamspeak_Channel_Name = format [TFAR_Teamspeak_Channel_Format, call tfar_autoswitch_main_fnc_getPort];
-        INFO_1("broadcasting TS channel name %1...", TFAR_Teamspeak_Channel_Name);
-        publicVariable "TFAR_Teamspeak_Channel_Name";
+        tf_radio_channel_name = format [TFAR_Teamspeak_Channel_Format, call tfar_autoswitch_main_fnc_getPort];
+        INFO_1("broadcasting TS channel name %1...", tf_radio_channel_name);
+        publicVariable "tf_radio_channel_name"; // yes deprecated, but that way I can circumvent CBA settings
     },
     true
 ] call CBA_fnc_addSetting;
@@ -52,10 +52,8 @@ tfar_autoswitch_main_fnc_getPort = {
                 WARNING("CBA setting is empty, will not set channel password.")
         };
         INFO_1("broadcasting TS channel password %1...", TFAR_Teamspeak_Channel_Password);
-        publicVariable "TFAR_Teamspeak_Channel_Password";
+        tf_radio_channel_password = TFAR_Teamspeak_Channel_Password;
+        publicVariable "tf_radio_channel_password";
     },
     true
 ] call CBA_fnc_addSetting;
-
-TFAR_Teamspeak_Channel_Name = call _getTsChannel;
-publicVariable "TFAR_Teamspeak_Channel_Name";
