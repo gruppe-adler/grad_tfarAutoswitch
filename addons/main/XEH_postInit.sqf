@@ -1,30 +1,61 @@
 #include "script_component.hpp"
 
-compile preprocessFileLineNumbers "\task_force_radio\functions\common.sqf";
+if (!isServer) exitWith {};
 
-waitUntil { isDedicated || isServer; };
-
-_getTsChannel = {
-        _rawResponse = ("reflection" callExtension "arg(port)");
-        _channel = "TFAR";
-        if (count _rawResponse > 0) then {
-                _response =  call compile _rawResponse;
-                _responseCode = (_response select 0);
-                _returnValue = (_response select 1);
-                if (_responseCode == 0) then {
-                        _channel = _channel + "-" + _returnValue;
-                } else {
-                        diag_log "could not get game server port: " + _returnValue;
-                };
-        } else {
-                diag_log "no answer for reflection.so call :(";
+tfar_autoswitch_main_fnc_getPort = {
+        private _rawResponse = ("reflection" callExtension "arg(port)");
+        private _port = "0";
+        if (count _rawResponse == 0) exitWith {
+                ERROR("no answer for reflection.so call :(");
+                0
         };
 
-        _channel;
+        (call compile _rawResponse) params [
+                ["_responseCode", 0, [0]],
+                ["_returnValue", "", [""]]
+        ];
+        if (_responseCode != 0) exitWith {
+                ERROR_1("could not get game server port from extension return value '%1'", _rawResponse);
+                0
+        };
+                   
+        parseNumber _returnValue;
 };
 
-TF_RADIO_CHANNEL_NAME = call _getTsChannel;
-TF_RADIO_CHANNEL_PASSWORD = "helium";
+[
+    "TFAR_Teamspeak_Channel_Format",
+    "EDITBOX",
+    ["Teamspeak channel format string", "Channel name with one parameter for the port number. Example: 'TFAR-%1'"],
+    "tfar_autoswitch",
+    "",
+    2,
+    {
+        if (TFAR_Teamspeak_Channel_Format == "") exitWith {
+                WARNING("CBA setting is empty, will not set channel name.")
+        };
+        TFAR_Teamspeak_Channel_Name = format [TFAR_Teamspeak_Channel_Format, call tfar_autoswitch_main_fnc_getPort];
+        INFO_1("broadcasting TS channel name %1...", TFAR_Teamspeak_Channel_Name);
+        publicVariable "TFAR_Teamspeak_Channel_Name";
+    },
+    true
+] call CBA_fnc_addSetting;
 
-publicVariable "TF_RADIO_CHANNEL_NAME";
-publicVariable "TF_RADIO_CHANNEL_PASSWORD";
+[
+    "TFAR_Teamspeak_Channel_Password",
+    "EDITBOX",
+    "Teamspeak channel password",
+    "tfar_autoswitch",
+    "",
+    2,
+    {
+        if (TFAR_Teamspeak_Channel_Password == "") exitWith {
+                WARNING("CBA setting is empty, will not set channel password.")
+        };
+        INFO_1("broadcasting TS channel password %1...", TFAR_Teamspeak_Channel_Password);
+        publicVariable "TFAR_Teamspeak_Channel_Password";
+    },
+    true
+] call CBA_fnc_addSetting;
+
+TFAR_Teamspeak_Channel_Name = call _getTsChannel;
+publicVariable "TFAR_Teamspeak_Channel_Name";

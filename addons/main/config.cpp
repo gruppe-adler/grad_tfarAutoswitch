@@ -6,7 +6,7 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"CBA_Extended_EventHandlers"};
+        requiredAddons[] = {"cba_xeh", "cba_settings"};
         author = "AUTHOR";
         VERSION_CONFIG;
     };
