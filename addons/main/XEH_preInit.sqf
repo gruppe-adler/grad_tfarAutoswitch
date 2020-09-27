@@ -2,26 +2,6 @@
 
 if (!isServer) exitWith {};
 
-tfar_autoswitch_main_fnc_getPort = {
-        private _rawResponse = ("reflection" callExtension "arg(port)");
-        private _port = "0";
-        if (count _rawResponse == 0) exitWith {
-                ERROR("no answer for reflection.so call :(");
-                0
-        };
-
-        (call compile _rawResponse) params [
-                ["_responseCode", 0, [0]],
-                ["_returnValue", "", [""]]
-        ];
-        if (_responseCode != 0) exitWith {
-                ERROR_1("could not get game server port from extension return value '%1'", _rawResponse);
-                0
-        };
-                   
-        parseNumber _returnValue;
-};
-
 [
     "TFAR_Teamspeak_Channel_Format",
     "EDITBOX",
@@ -33,7 +13,7 @@ tfar_autoswitch_main_fnc_getPort = {
         if (TFAR_Teamspeak_Channel_Format == "") exitWith {
                 WARNING("CBA setting is empty, will not set channel name.")
         };
-        tf_radio_channel_name = format [TFAR_Teamspeak_Channel_Format, call tfar_autoswitch_main_fnc_getPort];
+        tf_radio_channel_name = format [TFAR_Teamspeak_Channel_Format, call arma3_reflection_args_fnc_getPort];
         INFO_1("broadcasting TS channel name %1...", tf_radio_channel_name);
         publicVariable "tf_radio_channel_name"; // yes deprecated, but that way I can circumvent CBA settings
     },
