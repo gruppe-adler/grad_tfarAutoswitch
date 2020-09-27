@@ -13,7 +13,7 @@ if (!isServer) exitWith {};
         if (TFAR_Teamspeak_Channel_Format == "") exitWith {
                 WARNING("CBA setting is empty, will not set channel name.")
         };
-        tf_radio_channel_name = format [TFAR_Teamspeak_Channel_Format, call arma3_reflection_args_fnc_getPort];
+        tf_radio_channel_name = format [TFAR_Teamspeak_Channel_Format, call arma3_reflection_args_fnc_port];
         INFO_1("broadcasting TS channel name %1...", tf_radio_channel_name);
         publicVariable "tf_radio_channel_name"; // yes deprecated, but that way I can circumvent CBA settings
     },
