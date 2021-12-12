@@ -2,7 +2,7 @@
 
 if (!isServer) exitWith {};
 
-private _category = "tfar_autoswitch";
+private _category = "Gruppe Adler TFAR Autoswitch";
 [
     QGVAR(channelFormat),
     "EDITBOX",
