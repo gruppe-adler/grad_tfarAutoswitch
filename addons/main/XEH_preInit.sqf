@@ -2,7 +2,7 @@
 
 if (!isServer) exitWith {};
 
-private _category = "tfar_autoswitch";
+private _category = "GRAD TFAR Autoswitch";
 [
     QGVAR(channelFormat),
     "EDITBOX",

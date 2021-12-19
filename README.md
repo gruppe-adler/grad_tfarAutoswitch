@@ -1,6 +1,7 @@
-# tfar_autoswitch
+# Gruppe Adler TFAR Autoswitch
 
-Switch to different Teamspeak Channels based on server port. 
+Gruppe Adler TFAR Autoswitch enables automatic Teamspeak channel selection based on game server port.
+
 Depends on 
 * [TFAR](https://github.com/michail-nikolaev/task-force-arma-3-radio) 
 * [arma3-reflection](https://github.com/Fusselwurm/arma3-reflection)
@@ -15,10 +16,10 @@ Depends on
 
 these CBA settings exist:
 
-### tfar_autoswitch_main_channelFormat
+### grad_tfarAutoswitch_main_channelFormat
 
 Teamspeak channel to move players to. SQF format string with one parameter for the server port, example: "TFAR-%1"
 
-### tfar_autoswitch_main_channelPassword
+### grad_tfarAutoswitch_main_channelPassword
 
 Teamspeak password for target channel(s)

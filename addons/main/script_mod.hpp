@@ -1,5 +1,5 @@
 #define MAINPREFIX z
-#define PREFIX tfar_autoswitch
+#define PREFIX grad_tfarAutoswitch
 
 #include "script_version.hpp"
 

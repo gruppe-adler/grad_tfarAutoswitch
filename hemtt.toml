@@ -1,7 +1,15 @@
-name = "tfar_autoswitch"
-prefix = "tfar_autoswitch"
-author = "Fusselwurm"
+name = "grad_tfarAutoswitch"
+prefix = "grad_tfarautoswitch"
+author = "Gruppe Adler"
 template = "cba"
 mainprefix = "z"
 folder_optionals = true
 sig_version = 3
+
+files = [
+    "mod.cpp",
+    "logo_active_ca.paa",
+    "logo_ca.paa",
+    "overview_co.paa",
+    "logo_small_ca.paa"
+]
