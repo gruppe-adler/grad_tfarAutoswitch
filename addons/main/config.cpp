@@ -6,7 +6,7 @@ class CfgPatches {
         units[] = {};
         weapons[] = {};
         requiredVersion = REQUIRED_VERSION;
-        requiredAddons[] = {"cba_xeh", "cba_settings", "arma3_reflection_args"};
+        requiredAddons[] = {"cba_xeh", "cba_settings", "arma3_reflection_commandline"};
         author = "AUTHOR";
         VERSION_CONFIG;
     };
