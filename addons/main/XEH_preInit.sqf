@@ -14,7 +14,7 @@ private _category = "GRAD TFAR Autoswitch";
         if (GVAR(channelFormat) == "") exitWith {
                 WARNING("CBA setting is empty, will not set channel name.")
         };
-        tf_radio_channel_name = format [GVAR(channelFormat), call arma3_reflection_args_fnc_port];
+        tf_radio_channel_name = format [GVAR(channelFormat), call arma3_reflection_commandline_fnc_port];
         INFO_1("broadcasting TS channel name %1...", tf_radio_channel_name);
         publicVariable "tf_radio_channel_name"; // yes deprecated, but that way I can circumvent CBA settings
     },
